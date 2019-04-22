@@ -11,12 +11,12 @@ import javax.persistence.*;
 @Setter
 @ToString
 @Table(name = "t_user")
-public class User {
+public class User extends BaseDomain {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer uid;
+    private static final long serialVersionUID = 6685580900983126696L;
+
     private String username;
+
     private Integer age;
 
 }
