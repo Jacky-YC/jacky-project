@@ -35,18 +35,27 @@ public class JackyProjectApplicationTests {
         Assert.isNull(null,"不为空！");
     }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     @Test
     public void verifyCount(){
-
         List list = mock(List.class);
         list.add(1);
         list.add(2);
         list.add(3);
-
         verify(list).add(1);
-
-
-
     }
 
     @Test(expected = IOException.class)
