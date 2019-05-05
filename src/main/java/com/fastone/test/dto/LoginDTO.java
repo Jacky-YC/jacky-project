@@ -1,6 +1,5 @@
 package com.fastone.test.dto;
 
-import com.fastone.test.enuma.MyCheck;
 import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
