@@ -24,8 +24,8 @@ public class UserService {
         return userDao.findById(uid);
     }
 
-    public void addUser(User user) {
-        userDao.save(user);
+    public User addUser(User user) {
+       return userDao.save(user);
     }
 
     public List<User> findAll() {

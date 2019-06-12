@@ -1,5 +1,6 @@
 package com.fastone.test.controller;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import com.fastone.test.domain.User;
 import com.fastone.test.service.UserService;
 import com.fastone.test.util.Result;
@@ -22,11 +23,11 @@ public class UserController {
     @Resource
     private RestTemplate restTemplate;
 
-//    private Logger log = LoggerFactory.getLogger(UserController.class);
-
     @RequestMapping(value = "/findOne/{uid:\\d+}",method = RequestMethod.GET)
-    public Result findOne(@PathVariable("uid") Integer uid){
-        return new Result(true,"查询成功", StatusCode.OK,userService.findOne(uid).get());
+    @JsonView(Result.ResultSimple.class)
+    public Result findOne(@PathVariable("uid")  Integer uid){
+        User user = userService.findOne(uid).get();
+        return new Result(true,"查询成功", StatusCode.OK,  user);
     }
 
     @RequestMapping(value = "/findAll",method = RequestMethod.GET)
@@ -40,10 +41,10 @@ public class UserController {
         return new Result(true,"删除成功",StatusCode.OK);
     }
 
+    @JsonView(User.UserDetailView.class)
     @RequestMapping(value = "/addUser",method = RequestMethod.POST)
     public Result findOne(@RequestBody User user){
-        userService.addUser(user);
-        return new Result(true,"添加成功",StatusCode.OK);
+        return new Result(true,"添加成功",StatusCode.OK,userService.addUser(user));
     }
 
     @RequestMapping(value = "/findByUsername",method = RequestMethod.POST)
@@ -52,17 +53,11 @@ public class UserController {
         return new Result(true,"查询成功",StatusCode.OK,userService.findByUsername(user.getUsername()));
     }
 
-    @RequestMapping(value = "/findByUsernameAndAge",method = RequestMethod.POST)
-    public Result findByUsernameAndAge(@RequestBody User user){
-        System.out.println(user);
-        return new Result(true,"查询成功",StatusCode.OK,userService.findByUsernameAndAge(user.getUsername(),user.getAge()));
-    }
-
     @RequestMapping(value = "/countByUsernameLike",method = RequestMethod.POST)
     public Result countByUsernameLike(@RequestBody User user){
         System.out.println(user);
         System.out.println(null==user.getUsername());
-        if (user.getUsername().equals("")){
+        if ("".equals(user.getUsername())){
             log.error("参数为空哦，请重试");
             return new Result(false,"查询失败,参数为空",StatusCode.Fail);
         }
@@ -71,7 +66,6 @@ public class UserController {
 
     @RequestMapping(value = "/test",method = RequestMethod.GET)
     public Result testRest(){
-//        System.out.println(uri);
         String uri = "http://localhost:8080/findAll";
         return restTemplate.getForObject(URI.create(uri), Result.class);
     }

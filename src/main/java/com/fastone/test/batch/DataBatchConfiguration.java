@@ -20,7 +20,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
 
 import javax.annotation.Resource;
-import javax.persistence.EntityManagerFactory;
 
 @Configuration
 @EnableBatchProcessing
@@ -33,9 +32,6 @@ public class DataBatchConfiguration {
 
     @Resource
     private StepBuilderFactory stepBuilderFactory;
-
-    @Resource
-    private EntityManagerFactory emf;
 
     @Resource
     private JobListener jobListener;
