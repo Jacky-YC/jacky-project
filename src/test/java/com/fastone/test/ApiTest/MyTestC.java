@@ -1,4 +1,4 @@
-package com.fastone.test;
+package com.fastone.test.ApiTest;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;

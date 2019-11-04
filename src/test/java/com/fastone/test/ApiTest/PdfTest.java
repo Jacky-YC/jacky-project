@@ -1,4 +1,4 @@
-package com.fastone.test;
+package com.fastone.test.ApiTest;
 
 
 import java.io.IOException;

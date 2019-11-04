@@ -1,4 +1,4 @@
-package com.fastone.test;
+package com.fastone.test.ApiTest;
 
 public class ArraysTest {
     public static void main(String[] args) {
